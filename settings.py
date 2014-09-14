@@ -39,10 +39,14 @@ DEFAULT_APPS = (
 )
 
 THIRD_PARTY_APPS = (
-    'South',
+    'south',
 )
 
-INSTALLED_APPS = DEFAULT_APPS + THIRD_PARTY_APPS
+LOCAL_APPS = (
+    'apps.jobs',
+)
+
+INSTALLED_APPS = DEFAULT_APPS + THIRD_PARTY_APPS + LOCAL_APPS
 
 MIDDLEWARE_CLASSES = (
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -64,7 +68,7 @@ WSGI_APPLICATION = 'wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'NAME': os.path.join(BASE_DIR, 'db'),
     }
 }
 
