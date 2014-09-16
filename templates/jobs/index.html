@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+
+<div class="row">
+    {% block content %}
+    <h1>Recently added jobs</h1>
+    <br/><br/>
+    {% for job in jobs %}
+    <div class="col-sm-4 col-lg-4 col-md-4">
+        <div class="thumbnail">
+            <a href="{{ job.get_absolute_url }}">{{job.title}}</a>
+            <p>{{job.description}}</p>
+            <p>{{job.skills}}</p>
+            <p>{{created_at}}</p>
+        </div>
+    </div>
+
+    {% endfor %}
+    {% endblock %}
+</div>
