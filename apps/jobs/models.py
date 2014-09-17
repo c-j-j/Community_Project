@@ -27,5 +27,9 @@ class Job(models.Model):
         db_table = 'jobs'
         ordering = ['-created_at']
 
+
+    def __str__(self):
+        return self.title
+
     def __unicode__(self):
         return self.title

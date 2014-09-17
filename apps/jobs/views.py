@@ -2,7 +2,7 @@ from django.shortcuts import render, render_to_response, get_object_or_404
 from django.template import RequestContext
 from django.views import generic
 from django.views.generic import DetailView
-from apps.jobs.models import Job
+from apps.jobs.models import Job, Team
 
 
 class IndexView(generic.ListView):
@@ -16,6 +16,11 @@ class IndexView(generic.ListView):
 class JobView(generic.DetailView):
     model = Job
     template_name = 'jobs/job_details.html'
+
+
+class TeamView(generic.DetailView):
+    model = Team
+    template_name = 'jobs/team_details.html'
 
 
 # def index(generic.DetailView):
