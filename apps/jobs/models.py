@@ -1,19 +1,24 @@
 from django.core.urlresolvers import reverse
 from django.db import models
+from django.template.defaultfilters import slugify
 
 
 class Team(models.Model):
-    name = models.CharField(max_length=50)
+    name = models.CharField(max_length=100)
     description = models.TextField()
     created_at = models.DateTimeField(auto_now_add=True)
     location = models.CharField(max_length=50)
-    slug = models.SlugField(max_length=50, unique=True)
+    slug = models.SlugField(unique=True)
 
     class Meta:
         db_table = 'team'
 
     def __unicode__(self):
         return self.name
+
+    def save(self, *args, **kwargs):
+        self.slug = slugify(self.name + self.location)
+        super(Team, self).save(*args, **kwargs)
 
 
 class Job(models.Model):
