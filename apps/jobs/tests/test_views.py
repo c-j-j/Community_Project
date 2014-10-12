@@ -22,7 +22,7 @@ class IndexViewTests(TransactionTestCase):
         some_team = Team.objects.create(name="someTeamName", description="someTeamDescription", slug="someTeamSlug")
         some_job = Job.objects.create(title='someJobTitle', description="someJobDescription", team=some_team)
 
-        response = self.client.get(reverse('jobs:detail', args=[some_job.pk]))
+        response = self.client.get(reverse('jobs:job_detail', args=[str(some_job.pk)]))
         self.assertEqual(response.status_code, 200)
         self.assertEqual(response.context['job'].pk, some_job.pk)
         self.assertEqual(response.context['job'].team, some_team)
@@ -32,7 +32,7 @@ class IndexViewTests(TransactionTestCase):
     def test_team_details(self):
         some_team = Team.objects.create(name="someTeamName", description="someTeamDescription", slug="someTeamSlug")
 
-        response = self.client.get(reverse('jobs:team', args=[some_team.slug]))
+        response = self.client.get(reverse('jobs:team_detail', args=[some_team.slug]))
         self.assertEqual(response.status_code, 200)
         self.assertEqual(response.context['team'].pk, some_team.pk)
         self.assertTemplateUsed(response,"jobs/team_details.html")

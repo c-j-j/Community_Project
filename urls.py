@@ -10,3 +10,8 @@ urlpatterns = patterns('',
                        # url(r'^blog/', include('blog.urls')),
 
 )
+
+urlpatterns += patterns('django.contrib.auth.views',
+                        url(r'^login/$', 'login', {
+                            'template_name': 'registration/login.html',
+                        }, name='login'))

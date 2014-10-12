@@ -16,9 +16,15 @@ class Team(models.Model):
     def __unicode__(self):
         return self.name
 
+    def __str__(self):
+        return self.name
+
     def save(self, *args, **kwargs):
         self.slug = slugify(self.name + self.location)
         super(Team, self).save(*args, **kwargs)
+
+    def get_absolute_url(self):
+        return reverse('jobs:team_detail', args=[self.slug])
 
 
 class Job(models.Model):
@@ -37,3 +43,6 @@ class Job(models.Model):
 
     def __unicode__(self):
         return self.title
+
+    def get_absolute_url(self):
+        return reverse('jobs:job_detail', args=[self.pk])

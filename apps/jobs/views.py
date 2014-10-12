@@ -1,7 +1,7 @@
-from django.shortcuts import render, render_to_response, get_object_or_404
-from django.template import RequestContext
+from django.contrib.auth.decorators import login_required
+from django.utils.decorators import method_decorator
 from django.views import generic
-from django.views.generic import DetailView
+
 from apps.jobs.models import Job, Team
 
 
@@ -23,14 +23,29 @@ class TeamView(generic.DetailView):
     template_name = 'jobs/team_details.html'
 
 
-# def index(generic.DetailView):
-# page_title = 'Jobs page'
-# jobs = Job.objects.all()
-# return render_to_response(template_name, locals(), context_instance=RequestContext(request))
+class TeamList(generic.ListView):
+    model = Team
 
 
-# def job_details(request, job_id, template_name="jobs/job_details.html"):
-#   job = get_object_or_404(Job, id=job_id)
-#   page_title = 'Job details for '  # + job.title
-#  return render_to_response(template_name, locals(), context_instance=RequestContext(request))
+class ProtectedView(generic.TemplateView):
+    template_name = 'registration/login.html'
 
+    @method_decorator(login_required)
+    def dispatch(self, *args, **kwargs):
+        return super(ProtectedView, self).dispatch(*args, **kwargs)
+
+
+class CreateTeamView(generic.CreateView, ProtectedView):
+    template_name = 'jobs/add_team.html'
+    model = Team
+
+
+    # def get_context_data(self, **kwargs):
+    #     context = super(CreateTeamView, self).get_context_data(**kwargs)
+    #     context['new_addition'] = 'True'
+    #     return context
+
+
+class CreateJobView(generic.CreateView):
+    template_name = 'jobs/add_job.html'
+    model = Job
