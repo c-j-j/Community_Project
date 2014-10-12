@@ -44,6 +44,7 @@ THIRD_PARTY_APPS = (
 
 LOCAL_APPS = (
     'apps.jobs',
+    'apps.account',
 )
 
 INSTALLED_APPS = DEFAULT_APPS + THIRD_PARTY_APPS + LOCAL_APPS
@@ -99,4 +100,4 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.6/howto/static-files/
 
 STATIC_URL = '/static/'
-LOGIN_URL = '/login'
+LOGIN_REDIRECT_URL = '/accounts/my_account'
