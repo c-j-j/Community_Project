@@ -3,7 +3,7 @@ from apps.account import views
 
 urlpatterns = patterns('apps.account.views',
                        url(r'^register$', views.RegistrationForm.as_view(), name='registration'),
-                       url(r'^my_account/(?P<slug>.*)/$', views.UserAccount.as_view(), name='account_details'),
+                       url(r'^my_account/$', views.UserAccount.as_view(), name='account_details'),
 )
 
 urlpatterns += patterns('django.contrib.auth.views',

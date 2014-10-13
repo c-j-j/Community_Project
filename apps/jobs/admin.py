@@ -10,8 +10,6 @@ class JobAdmin(admin.ModelAdmin):
 
 class TeamAdmin(admin.ModelAdmin):
     list_display = ('name', 'description', 'created_at', 'location')
-    prepopulated_fields = {'slug': ('name',)}
-
 
 
 admin.site.register(Job, JobAdmin)

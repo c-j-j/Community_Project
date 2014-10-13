@@ -15,7 +15,7 @@
                 <p>{{job.description}}</p>
                 <p>{{job.skills}}</p>
                 <p>{{job.created_at}}</p>
-                <a href="{% url 'jobs:team_detail' job.team.slug %}">{{job.team.name}}</a>
+                <a href="{% url 'jobs:team_detail' job.team.pk %}">{{job.team.name}}</a>
             </div>
         </div>
     {% endfor %}

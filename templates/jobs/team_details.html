@@ -2,3 +2,8 @@
 <h1>{{ new_addition }}</h1>
 
 <h2>{{team.name}}</h2>
+
+<h1>List of users</h1>
+{% for user in team.users.all %}
+{{ user.username }}
+{% endfor %}

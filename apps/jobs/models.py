@@ -1,6 +1,6 @@
+from django.contrib.auth.models import User
 from django.core.urlresolvers import reverse
 from django.db import models
-from django.template.defaultfilters import slugify
 
 
 class Team(models.Model):
@@ -8,7 +8,7 @@ class Team(models.Model):
     description = models.TextField()
     created_at = models.DateTimeField(auto_now_add=True)
     location = models.CharField(max_length=50)
-    slug = models.SlugField(unique=True)
+    users = models.ManyToManyField(User)
 
     class Meta:
         db_table = 'team'
@@ -20,11 +20,10 @@ class Team(models.Model):
         return self.name
 
     def save(self, *args, **kwargs):
-        self.slug = slugify(self.name + self.location)
         super(Team, self).save(*args, **kwargs)
 
     def get_absolute_url(self):
-        return reverse('jobs:team_detail', args=[self.slug])
+        return reverse('jobs:team_detail', args=[self.pk])
 
 
 class Job(models.Model):

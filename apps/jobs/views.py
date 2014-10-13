@@ -35,15 +35,16 @@ class ProtectedView(generic.TemplateView):
         return super(ProtectedView, self).dispatch(*args, **kwargs)
 
 
-class CreateTeamView(generic.CreateView, ProtectedView):
+class CreateTeamView(generic.CreateView):
     template_name = 'jobs/add_team.html'
     model = Team
+    fields = ['name', 'description', 'location']
 
-
-    # def get_context_data(self, **kwargs):
-    #     context = super(CreateTeamView, self).get_context_data(**kwargs)
-    #     context['new_addition'] = 'True'
-    #     return context
+    def form_valid(self, form):
+        form.instance.save()
+        if self.request.user.is_authenticated():
+            form.instance.users.add(self.request.user)
+        return super(CreateTeamView, self).form_valid(form)
 
 
 class CreateJobView(generic.CreateView):
