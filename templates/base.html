@@ -43,12 +43,18 @@
                 </li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
-                <li>
-                    <a href="{% url 'account:login' %}">Login</a>
-                </li>
-                <li>
-                    <a href="{% url 'account:registration' %}">Register</a>
-                </li>
+                {% if user.is_authenticated %}
+                    <li>
+                        <a href="{% url "django.contrib.auth.views.logout" %}">Logout</a>
+                    </li>
+                {% else %}
+                    <li>
+                        <a href="{% url 'account:login' %}">Login</a>
+                    </li>
+                    <li>
+                        <a href="{% url 'account:registration' %}">Register</a>
+                    </li>
+                {% endif %}
             </ul>
         </div>
         <!-- /.navbar-collapse -->

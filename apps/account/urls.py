@@ -9,4 +9,7 @@ urlpatterns = patterns('apps.account.views',
 urlpatterns += patterns('django.contrib.auth.views',
                         url(r'^login/$', 'login', {
                             'template_name': 'registration/login.html',
-                        }, name='login'))
+                        }, name='login'),
+                        url(r'^logout/$', 'logout',
+                          {'next_page': 'registration/logged_out.html'})
+)
