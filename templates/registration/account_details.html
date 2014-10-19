@@ -3,3 +3,8 @@
 {{ user.username }}
 {{ user.password }}
 <h1>List teams here</h1>
+{% for t in user.team_set.all %}
+{{ t.name }}
+{% endfor %}
+
+

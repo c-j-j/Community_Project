@@ -1,9 +1,16 @@
-<h1>Team details: todo</h1>
-<h1>{{ new_addition }}</h1>
+{% extends "base.html" %}
+<div class="row">
 
-<h2>{{team.name}}</h2>
+    {% block content %}
+        <h1>Team details: todo</h1>
 
-<h1>List of users</h1>
-{% for user in team.users.all %}
-{{ user.username }}
-{% endfor %}
+        <h1>{{ new_addition }}</h1>
+
+        <h2>{{ team.name }}</h2>
+
+        <h1>List of users</h1>
+        {% for user in team.users.all %}
+            {{ user.username }}
+        {% endfor %}
+    {% endblock %}
+</div>

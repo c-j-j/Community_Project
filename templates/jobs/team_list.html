@@ -1,6 +1,12 @@
-<h1>Teams added recently</h1>
+{% extends "base.html" %}
+<div class="row">
 
-<h1> TODO </h1>
-{% for t in team_list %}
-<h1>Team name: {{ t.name }}</h1>
-{% endfor %}
+    {% block content %}
+        <h1>Teams added recently</h1>
+
+        <h1> TODO </h1>
+        {% for t in team_list %}
+            <h1>Team name: {{ t.name }}</h1>
+        {% endfor %}
+    {% endblock %}
+</div>
