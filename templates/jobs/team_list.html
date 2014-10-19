@@ -4,9 +4,21 @@
     {% block content %}
         <h1>Teams added recently</h1>
 
-        <h1> TODO </h1>
-        {% for t in team_list %}
-            <h1>Team name: {{ t.name }}</h1>
+        {% for team in team_list %}
+            <div class="panel panel-primary">
+                <div class="panel-heading"><strong>Team:</strong> {{ team.name }}
+                    <div class="pull-right"><strong>Location:</strong> {{ team.location }}</div>
+                </div>
+                <div class="panel-body">
+                    <p><strong>Date Added:</strong> {{ team.created_at }}</p>
+
+                    <p><strong>Description: </strong>{{ team.description }}</p>
+
+                    <form action="{% url "jobs:team_detail" team.pk %}">
+                            <input type="submit" class="btn btn-success pull-right" value="Click for details">
+                    </form>
+                </div>
+            </div>
         {% endfor %}
     {% endblock %}
 </div>

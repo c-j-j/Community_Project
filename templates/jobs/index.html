@@ -4,21 +4,26 @@
 <div class="row">
     {% block content %}
         <h1>Recently added jobs</h1>
-        <br/><br/>
-
+        <h1>{{ someVar }}</h1>
         {% if latest_jobs %}
 
             {% for job in latest_jobs %}
-                <div class="col-sm-4 col-lg-4 col-md-4">
-                    <div class="thumbnail">
-                        <a href="{% url 'jobs:job_detail' job.id %}">{{ job.title }}</a>
 
-                        <p>{{ job.description }}</p>
+                <div class="panel panel-primary">
+                    <div class="panel-heading"><strong>Job Title:</strong> {{ job.title }}
+                        <div class="pull-right"><strong>Location:</strong> {{ job.team.location }}</div>
+                    </div>
+                    <div class="panel-body">
+                        <p><strong>Date Posted:</strong> {{ job.created_at }}</p>
 
-                        <p>{{ job.skills }}</p>
+                        <p><strong>Description: </strong>{{ job.description }}</p>
 
-                        <p>{{ job.created_at }}</p>
-                        <a href="{% url 'jobs:team_detail' job.team.pk %}">{{ job.team.name }}</a>
+                        <div class="well">
+                            <p><strong>Skills: </strong> {{ job.skills }}</p>
+                        </div>
+                        <form action="{% url "jobs:job_detail" job.pk %}">
+                            <input type="submit" class="btn btn-success pull-right" value="Click for details">
+                        </form>
                     </div>
                 </div>
             {% endfor %}

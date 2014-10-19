@@ -6,7 +6,6 @@
         <h1>TODO: User details page</h1>
         {{ user.email }}
         {{ user.username }}
-        {{ user.password }}
         <h1>List teams here</h1>
         {% for t in user.team_set.all %}
             {{ t.name }}

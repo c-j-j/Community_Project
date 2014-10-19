@@ -45,6 +45,9 @@
             <ul class="nav navbar-nav navbar-right">
                 {% if user.is_authenticated %}
                     <li>
+                        <a href="{% url "account:account_details" %}">Account details</a>
+                    </li>
+                    <li>
                         <a href="{% url "django.contrib.auth.views.logout" %}">Logout</a>
                     </li>
                 {% else %}

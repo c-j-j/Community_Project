@@ -81,6 +81,13 @@ STATICFILES_DIRS = (
     os.path.join(BASE_DIR, "static"),
 )
 
+TEMPLATE_CONTEXT_PROCESSORS = (
+    'django.contrib.auth.context_processors.auth',
+    'django.core.context_processors.debug',
+    'django.core.context_processors.i18n',
+    'django.core.context_processors.media',
+    'utils.context_processors.community'
+)
 
 # Internationalization
 # https://docs.djangoproject.com/en/1.6/topics/i18n/
@@ -98,6 +105,9 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.6/howto/static-files/
+
+
+SITE_NAME = 'Community Project'
 
 STATIC_URL = '/static/'
 LOGIN_REDIRECT_URL = '/accounts/my_account'

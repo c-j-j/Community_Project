@@ -8,23 +8,46 @@ from apps.jobs.models import Job, Team
 class IndexView(generic.ListView):
     template_name = "jobs/index.html"
     context_object_name = 'latest_jobs'
+    someVar="hello"
 
     def get_queryset(self):
         return Job.objects.all()
+
+    def get_context_data(self, **kwargs):
+        context = super(IndexView, self).get_context_data(**kwargs)
+        context['page_title'] = "Job Search"
+        return context
+
 
 
 class JobView(generic.DetailView):
     model = Job
     template_name = 'jobs/job_details.html'
 
+    def get_context_data(self, **kwargs):
+        context = super(JobView, self).get_context_data(**kwargs)
+        context['page_title'] = "Job Details"
+        return context
+
+
 
 class TeamView(generic.DetailView):
     model = Team
     template_name = 'jobs/team_details.html'
 
+    def get_context_data(self, **kwargs):
+        context = super(TeamView, self).get_context_data(**kwargs)
+        context['page_title'] = "Team Details"
+        return context
 
 class TeamList(generic.ListView):
     model = Team
+
+    def get_context_data(self, **kwargs):
+        context = super(TeamList, self).get_context_data(**kwargs)
+        context['page_title'] = "Team List"
+        return context
+
 
 
 class ProtectedView(generic.TemplateView):
@@ -46,7 +69,18 @@ class CreateTeamView(generic.CreateView):
             form.instance.users.add(self.request.user)
         return super(CreateTeamView, self).form_valid(form)
 
+    def get_context_data(self, **kwargs):
+        context = super(CreateTeamView, self).get_context_data(**kwargs)
+        context['page_title'] = "Create Team"
+        return context
+
+
 
 class CreateJobView(generic.CreateView):
     template_name = 'jobs/add_job.html'
     model = Job
+
+    def get_context_data(self, **kwargs):
+        context = super(CreateJobView, self).get_context_data(**kwargs)
+        context['page_title'] = "Create Job"
+        return context
