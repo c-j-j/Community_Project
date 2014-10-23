@@ -87,3 +87,10 @@ class CreateJobView(generic.CreateView):
         context = super(CreateJobView, self).get_context_data(**kwargs)
         context['page_title'] = "Create Job"
         return context
+
+
+class JobComments(generic.View):
+    def get(self, *args, **kwargs):
+        jobComments = JobComment.objects.get(job__pk=kwargs['pk'])
+        data = serializers.serialize("json", [jobComments,])
+        return HttpResponse(data, content_type='application/json')
