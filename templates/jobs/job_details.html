@@ -1,12 +1,18 @@
 {% extends "base.html" %}
+{% load staticfiles %}
 <div class="row">
 
     {% block content %}
+        <div id="hiddenData" style="display: none;">{{job.pk}}</div>
         <h1>TODO: Job details</h1>
 
         <h1>{{ new_addition }}</h1>
 
         <h2>{{ job.title }}</h2>
+
+        <div id="react-commentbox"></div>
+        <script type="text/jsx" src="{% static "js/react-commentbox.js" %}"></script>
+
     {% endblock %}
 
 </div>

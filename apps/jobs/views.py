@@ -1,14 +1,18 @@
 from django.contrib.auth.decorators import login_required
+from django.core import serializers
+from django.core.serializers import json
+from django.http import JsonResponse, HttpResponse
 from django.utils.decorators import method_decorator
 from django.views import generic
+from apps.jobs.forms import CommentForm
 
-from apps.jobs.models import Job, Team
+from apps.jobs.models import Job, Team, JobComment
 
 
 class IndexView(generic.ListView):
     template_name = "jobs/index.html"
     context_object_name = 'latest_jobs'
-    someVar="hello"
+    someVar = "hello"
 
     def get_queryset(self):
         return Job.objects.all()
@@ -17,7 +21,6 @@ class IndexView(generic.ListView):
         context = super(IndexView, self).get_context_data(**kwargs)
         context['page_title'] = "Job Search"
         return context
-
 
 
 class JobView(generic.DetailView):
@@ -30,7 +33,6 @@ class JobView(generic.DetailView):
         return context
 
 
-
 class TeamView(generic.DetailView):
     model = Team
     template_name = 'jobs/team_details.html'
@@ -38,7 +40,9 @@ class TeamView(generic.DetailView):
     def get_context_data(self, **kwargs):
         context = super(TeamView, self).get_context_data(**kwargs)
         context['page_title'] = "Team Details"
+        context['form']=CommentForm()
         return context
+
 
 class TeamList(generic.ListView):
     model = Team
@@ -47,7 +51,6 @@ class TeamList(generic.ListView):
         context = super(TeamList, self).get_context_data(**kwargs)
         context['page_title'] = "Team List"
         return context
-
 
 
 class ProtectedView(generic.TemplateView):

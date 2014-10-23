@@ -1,6 +1,7 @@
 from django.contrib.auth.models import User
 from django.core.urlresolvers import reverse
 from django.db import models
+from django.db.models import Model
 
 
 class Team(models.Model):
@@ -45,3 +46,14 @@ class Job(models.Model):
 
     def get_absolute_url(self):
         return reverse('jobs:job_detail', args=[self.pk])
+
+
+class JobComment(models.Model):
+    comment = models.TextField()
+    user = models.OneToOneField(User)
+    job = models.ForeignKey(Job)
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        db_table = 'job_comments'
+        ordering = ['-created_at']
